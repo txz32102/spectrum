@@ -1,9 +1,6 @@
 import torch.nn as nn
 import torch
 
-# def conv1x1(in_planes, out_planes, stride=1):
-#     return nn.Conv1d(in_planes, out_planes, kernel_size=1, stride=stride, bias=False)
-
 
 def conv1x1(in_planes, out_planes, kernel_size=3, stride=1):
     padding = (kernel_size - 1) // 2

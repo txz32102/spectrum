@@ -1,0 +1,1 @@
+Epoch [1/1], Train Loss: 9854.8701, Val Loss: 14919.6543, Test Loss: 7804.5884
