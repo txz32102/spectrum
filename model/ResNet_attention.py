@@ -797,61 +797,78 @@ class ResidualAttentionModel_92_32input_update(nn.Module):
         )
         self.fc = nn.Linear(1024,2)
 
-    def forward(self, x):
+    def forward(self, x, debug=False):
         out = self.conv1(x)
-        print(f"After conv1: {out.shape}")
+        if(debug):
+            print(f"After conv1: {out.shape}")
         
         # Uncomment this line if needed
         # out = self.mpool1(out)
         # print("After mpool1:", out.shape)
         
         out = self.residual_block1(out)
-        print(f"After residual_block1: {out.shape}")
+        if(debug):
+            print(f"After residual_block1: {out.shape}")
         
         shape = out.shape
         out = out.reshape(shape[0], shape[1] * 2, shape[2], shape[3] // 2)
-        print(f"After reshape: {out.shape}")
+        if(debug):
+            print(f"After reshape: {out.shape}")
         
         out = self.attention_module1(out)
-        print(f"After attention_module1: {out.shape}")
+        if(debug):
+            print(f"After attention_module1: {out.shape}")
         
         out = self.residual_block2(out)
-        print(f"After residual_block2: {out.shape}")
+        if(debug):
+            print(f"After residual_block2: {out.shape}")
         
         out = self.attention_module2(out)
-        print(f"After attention_module2: {out.shape}")
+        if(debug):
+            print(f"After attention_module2: {out.shape}")
         
         out = self.attention_module2_2(out)
-        print(f"After attention_module2_2: {out.shape}")
+        if(debug):
+            print(f"After attention_module2_2: {out.shape}")
         
         out = self.residual_block3(out)
-        print(f"After residual_block3: {out.shape}")
+        if(debug):
+            print(f"After residual_block3: {out.shape}")
         
         out = self.attention_module3(out)
-        print(f"After attention_module3: {out.shape}")
+        if(debug):
+            print(f"After attention_module3: {out.shape}")
         
         out = self.attention_module3_2(out)
-        print(f"After attention_module3_2: {out.shape}")
+        if(debug):
+            print(f"After attention_module3_2: {out.shape}")
         
         out = self.attention_module3_3(out)
-        print(f"After attention_module3_3: {out.shape}")
+        if(debug):
+            print(f"After attention_module3_3: {out.shape}")
         
         out = self.residual_block4(out)
-        print(f"After residual_block4: {out.shape}")
+        if(debug):
+            print(f"After residual_block4: {out.shape}")
         
         out = self.residual_block5(out)
-        print(f"After residual_block5: {out.shape}")
+        if(debug):
+            print(f"After residual_block5: {out.shape}")
         
         out = self.residual_block6(out)
-        print(f"After residual_block6: {out.shape}")
+        if(debug):
+            print(f"After residual_block6: {out.shape}")
         
         out = self.mpool2(out)
-        print(f"After mpool2: {out.shape}")
+        if(debug):
+            print(f"After mpool2: {out.shape}")
         
         out = out.view(out.size(0), -1)
-        print(f"After flatten: {out.shape}")
+        if(debug):
+            print(f"After flatten: {out.shape}")
         
         out = self.fc(out)
-        print(f"After fully connected layer (fc): {out.shape}")
+        if(debug):
+            print(f"After fully connected layer (fc): {out.shape}")
         
         return out
